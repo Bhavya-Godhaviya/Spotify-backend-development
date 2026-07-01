@@ -13,7 +13,7 @@ async function registerUser(req, res){
     })
 
     if(isUseralreadyExist){
-        return res.status(409).json({
+        return res.status(401).json({
             message: "User already exists"
         })
     }
@@ -31,7 +31,7 @@ async function registerUser(req, res){
 
     res.cookie("token", token)
 
-    res.status(201).json({
+    res.status(200).json({
         message: "User registered successfully",
         user: {
             id: user._id,
@@ -53,7 +53,7 @@ async function loginUser(req, res){
     })
 
     if(!user){
-        return res.status(409).json({
+        return res.status(401).json({
             message: "Invalid credentials"
         })
     }
@@ -61,19 +61,19 @@ async function loginUser(req, res){
     const isPasswordvalid = await bcrypt.compare(password, user.password)
 
     if(!isPasswordvalid){
-        return res.status(409).json({
+        return res.status(401).json({
             message: "Invalid credentials"
         })
     }
 
     const token = jwt.sign({
-        _id: user._id,
+        id: user._id,
         role: user.role,
     },process.env.JWT_SECRET)
 
     res.cookie("token", token)
 
-    res.status(201).json({
+    res.status(200).json({
         message: "User logged in successfully",
         user: {
             id: user._id,
