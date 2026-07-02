@@ -5,14 +5,14 @@ const albumSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  musics:[{
+  musics :[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "music",
     required: true,
   }],
   artist: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "artist",
+    ref: "user",
     required: true,
   }
 
