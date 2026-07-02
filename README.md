@@ -1,2 +1,2 @@
 # Spotify-backend-development
-This is a project to boost my backend development project
+This is a project to boost my backend development skills
